@@ -1,2 +1,2 @@
 # Cash-Tracker
-This repository is used to manage code for CashTrack Project writte in python
+This repository is used to manage code for CashTrack Project written in python
