@@ -5,6 +5,13 @@ from telegram.ext.commandhandler import CommandHandler
 from telegram.ext.messagehandler import MessageHandler
 from telegram.ext.filters import Filters
 
+
+# ALL FUNCTIONS
+import spending.spend
+import summary.summary
+
+
+
 try:
     updater = Updater("5723259015:AAEgN-R-Vl4i9UYz5XLLQT1qUs-AQSsocrA",
                     use_context=True)
@@ -19,8 +26,10 @@ def start(update: Update, context: CallbackContext):
 
 
 
-
 updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('spent', spending.spend.spent))
+updater.dispatcher.add_handler(CommandHandler('summary', summary.summary.summary))
+
 
 
 
