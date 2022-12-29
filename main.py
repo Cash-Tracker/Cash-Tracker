@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import os
 
 
+
 # ENVS
 load_dotenv()
 telegramKey = os.getenv("telegramKey")
@@ -26,6 +27,7 @@ import summary.summary
 try:
     updater = Updater(telegramKey,
                     use_context=True)
+    print("Successfully Connected to Telegram API")
 except:
     print("Error in connecting to telegram API")
 
@@ -48,6 +50,8 @@ except:
 def start(update: Update, context: CallbackContext):
 	update.message.reply_text(
 		"Hello There! We are BetterMoney. We will help you manage your expenses and track them. We are currently under development and will be live soon!")
+
+
 
 
 
