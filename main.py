@@ -4,6 +4,15 @@ from telegram.ext.callbackcontext import CallbackContext
 from telegram.ext.commandhandler import CommandHandler
 from telegram.ext.messagehandler import MessageHandler
 from telegram.ext.filters import Filters
+import mysql.connector as DatabaseConnector
+from dotenv import load_dotenv
+import os
+
+
+# ENVS
+load_dotenv()
+telegramKey = os.getenv("telegramKey")
+databaseLocalhostPassword = os.getenv("databaseLocalhostPassword")
 
 
 # ALL FUNCTIONS
@@ -12,11 +21,27 @@ import summary.summary
 
 
 
+
+# TELEGRAM API
 try:
-    updater = Updater("5723259015:AAEgN-R-Vl4i9UYz5XLLQT1qUs-AQSsocrA",
+    updater = Updater(telegramKey,
                     use_context=True)
 except:
     print("Error in connecting to telegram API")
+
+
+
+# MYSQL DATABASE CONNECTION
+try:
+    db = DatabaseConnector.connect(
+    host = 'localhost',
+    user = 'BetterMoney', 
+    passwd = databaseLocalhostPassword, 
+    database = 'BetterMoney')
+    print("Successfully Connected to MySQL Database")
+except:
+    print("Something is Wrong with MySQL Connection!")
+
 
 
 
