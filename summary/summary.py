@@ -14,7 +14,7 @@ def summary(update: Update, context: CallbackContext):
 
 
     # DUMMY REQUEST
-    # responseList = database.getSummary("2022-12")
+    # responseList = database.getSummary("2022", "12", <ID>)
     responseList = [[50, 'food', '2022-12-15 20:00:00'], [1000, 'clothes', '2022-12-15 15:00:00']]
 
     # You need to write some code here to depict this data

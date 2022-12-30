@@ -1,7 +1,7 @@
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
 
-import spending.getCurrentTime
+import getCurrentTime
 
 
 # LAASYA
@@ -11,6 +11,12 @@ def spent(update: Update, context: CallbackContext):
 
     # currentTime = getCurrentTime.getCurrentTime()
 
+
+
+    # database.pushSpent(ID, Amount, Category, onWhat, Note, Time: "yyyy-mm-dd hh:mm")
+
+
+    
 
 
 
