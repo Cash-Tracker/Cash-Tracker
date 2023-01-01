@@ -18,4 +18,3 @@ try:
 except:
     print("Something is Wrong with MySQL Connection!")
 
-

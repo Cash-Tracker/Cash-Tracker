@@ -1,5 +1,6 @@
 from telegram.ext.updater import Updater
 from telegram.update import Update
+from telegram.ext.conversationhandler import ConversationHandler
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.ext.commandhandler import CommandHandler
 from telegram.ext.messagehandler import MessageHandler
@@ -15,7 +16,7 @@ telegramKey = os.getenv("telegramKey")
 
 
 # ALL FUNCTIONS
-import spending.spend
+from spending.spend import conv_handler_spent
 import summary.summary
 
 
@@ -35,18 +36,14 @@ except:
 
 
 def start(update: Update, context: CallbackContext):
-	update.message.reply_text(
-		"Hello There! We are BetterMoney. We will help you manage your expenses and track them. We are currently under development and will be live soon!")
-
+    update.message.reply_text(f"Hello There! We are BetterMoney. We will help you manage your expenses and track them. We are currently under development and will be live soon!")
 
 
 
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('spent', spending.spend.spent))
+updater.dispatcher.add_handler(conv_handler_spent)
 updater.dispatcher.add_handler(CommandHandler('summary', summary.summary.summary))
-
-
 
 
 updater.start_polling()

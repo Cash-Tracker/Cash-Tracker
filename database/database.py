@@ -1,4 +1,4 @@
-from db_init import dbCursor, db
+from database.db_init import dbCursor, db
 
 
 
