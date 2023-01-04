@@ -26,7 +26,7 @@ def amount_conv(update: Update, context: CallbackContext):
 
 def onWhat_conv(update: Update, context: CallbackContext):
     context.user_data["onWhat"] = update.message.text
-    choices = ["food", "entertainment", "party", "clothes", "fuel", "others"]
+    choices = context.user_data["categories"]
     reply_markup = ReplyKeyboardMarkup([[KeyboardButton(choice)] for choice in choices], one_time_keyboard=True, resize_keyboard=True)
     update.message.reply_text("Cool! What category does it belong to?", reply_markup=reply_markup)
     return Category
@@ -64,7 +64,7 @@ def cancel(update: Update, context: CallbackContext):
 conv_handler_spent = ConversationHandler(
     entry_points=[CommandHandler("spent", spent)],
     states={
-        Amount: [MessageHandler(Filters.regex(pattern=r'\d+'), amount_conv)],
+        Amount: [MessageHandler(Filters.text & Filters.regex('^[0-9]+$'), amount_conv)],
         onWhat: [MessageHandler(~Filters.command, onWhat_conv)],
         Category: [MessageHandler(~Filters.command, category_conv)],
         Note: [MessageHandler(~Filters.command, note_conv)],

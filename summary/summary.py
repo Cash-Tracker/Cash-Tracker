@@ -1,6 +1,6 @@
 from telegram.update import Update
 from telegram.ext.callbackcontext import CallbackContext
-
+from spending.getCurrentTime import getCurrentTime
 
 
 # Keerthi
@@ -16,7 +16,7 @@ def summary(update: Update, context: CallbackContext):
     # DUMMY REQUEST
     # responseList = database.getSummary("2022", "12", <ID>)
     responseList = [[50, 'food', '2022-12-15 20:00:00'], [1000, 'clothes', '2022-12-15 15:00:00']]
-
+    time = getCurrentTime()
     # You need to write some code here to depict this data
 
 
