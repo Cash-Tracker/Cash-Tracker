@@ -7,3 +7,4 @@ def getCurrentTime() -> str:
     formattedDateTime = now.strftime(r"%Y-%m-%d %H:%M:%S")
     return formattedDateTime
 
+print(getCurrentTime())

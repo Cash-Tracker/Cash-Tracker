@@ -8,7 +8,7 @@ from database.db_init import dbCursor, db
 
 
 def getSummary(year, month, ID) -> list:
-    dbCursor.execute(f"select amount, category from spent where month(datetime) = {month} and year(datetime) = {year} and ID = '{ID}'")
+    dbCursor.execute(f"select amount, category from spent where month(datetime) = {month} and year(datetime) = {year} and userID = '{ID}'")
     return dbCursor.fetchall()
 
 
