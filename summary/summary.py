@@ -3,7 +3,7 @@ from telegram.ext.callbackcontext import CallbackContext
 from spending.getCurrentTime import getCurrentTime
 
 
-# Shreya
+
 
 def summary(update: Update, context: CallbackContext):
     update.message.reply_text("placeholderText For Summary")
