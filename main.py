@@ -17,7 +17,8 @@ telegramKey = os.getenv("telegramKey")
 
 # ALL FUNCTIONS
 from spending.spend import conv_handler_spent
-import summary.summary
+from summary.summary import summary
+from editCategories.editCategories import conv_handler_editCategories
 
 
 
@@ -68,9 +69,9 @@ conv_handler_start = ConversationHandler(
 
 
 updater.dispatcher.add_handler(conv_handler_spent)
-updater.dispatcher.add_handler(CommandHandler('summary', summary.summary.summary))
+updater.dispatcher.add_handler(CommandHandler('summary', summary))
 updater.dispatcher.add_handler(conv_handler_start)
-
+updater.dispatcher.add_handler(conv_handler_editCategories)
 
 
 
