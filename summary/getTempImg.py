@@ -6,7 +6,27 @@ import matplotlib.pyplot as plt
 
 def getTempImg(lables, vals):
     matplotlib.use("Agg")
-    color = ['#47CACC','#F3ABB6','#A8E6CE','#D67280']
+    color = ['#dcedc1',
+            '#ffd3b6',
+            '#ffaaa5',
+            '#ff8b94',
+            '#47CACC',
+            '#F3ABB6',
+            '#A8E6CE',
+            '#D67280',
+            '#F9E07F',
+            '#94B447',
+            '#ABD1DC',
+            '#C9BBCB',
+            '#3da4ab',
+            '#f6cd61',
+            '#fe8a71',
+            '#ee4035',
+            '#f37736',
+            '#fdf498', 
+            '#7bc043',
+            '#0392cf'
+            ]
   
 
     def make_autopct(sizes):
