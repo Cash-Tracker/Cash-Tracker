@@ -1,7 +1,7 @@
-from telegram.update import Update
-from telegram.ext.callbackcontext import CallbackContext
+from telegram import Update
+from telegram.ext import CallbackContext
 from telegram.ext import ConversationHandler, CommandHandler, MessageHandler
-from telegram.ext.filters import Filters
+import telegram.ext.filters as filters
 from telegram import KeyboardButton, ReplyKeyboardMarkup
 from spending.getCurrentTime import getCurrentTime
 from database.database import pushSpent
@@ -10,36 +10,36 @@ Amount, Category, onWhat, Note = range(4)
 
 
 
-def spent(update: Update, context: CallbackContext):
-    update.message.reply_text("How much did you spend?")
+async def spent(update: Update, context: CallbackContext):
+    await update.message.reply_text("How much did you spend?")
     return Amount
 
 
 
-def amount_conv(update: Update, context: CallbackContext):
+async def amount_conv(update: Update, context: CallbackContext):
     context.user_data["Amount"] = update.message.text
     amount = context.user_data["Amount"]
-    update.message.reply_text(f"Okay, On what did you spend {amount} on?")
+    await update.message.reply_text(f"Okay, On what did you spend {amount} on?")
     return onWhat
 
 
 
-def onWhat_conv(update: Update, context: CallbackContext):
+async def onWhat_conv(update: Update, context: CallbackContext):
     context.user_data["onWhat"] = update.message.text
     choices = context.user_data["categories"]
     reply_markup = ReplyKeyboardMarkup([[KeyboardButton(choice)] for choice in choices], one_time_keyboard=True, resize_keyboard=True)
-    update.message.reply_text("Cool! What category does it belong to?", reply_markup=reply_markup)
+    await update.message.reply_text("Cool! What category does it belong to?", reply_markup=reply_markup)
     return Category
 
 
-def category_conv(update: Update, context: CallbackContext):
+async def category_conv(update: Update, context: CallbackContext):
     context.user_data["Category"] = update.message.text
-    update.message.reply_text("Awesome, Finally, Tell me a small note you want to add to this.")
+    await update.message.reply_text("Awesome, Finally, Tell me a small note you want to add to this.")
     return Note
 
 
 
-def note_conv(update: Update, context: CallbackContext):
+async def note_conv(update: Update, context: CallbackContext):
     context.user_data["Note"] = update.message.text
     time = getCurrentTime()
     id = update.message.from_user["id"]
@@ -50,12 +50,12 @@ def note_conv(update: Update, context: CallbackContext):
 
     # ID, amount, category, onWhat, note, datetime
     pushSpent(id, amount, category, onWhat, Note, time)
-    update.message.reply_text("Done!")
+    await update.message.reply_text("Done!")
     return ConversationHandler.END
 
 
-def cancel(update: Update, context: CallbackContext):
-    update.message.reply_text("Okay! Cancelled")
+async def cancel(update: Update, context: CallbackContext):
+    await update.message.reply_text("Okay! Cancelled")
     return ConversationHandler.END
 
 
@@ -64,10 +64,10 @@ def cancel(update: Update, context: CallbackContext):
 conv_handler_spent = ConversationHandler(
     entry_points=[CommandHandler("spent", spent)],
     states={
-        Amount: [MessageHandler(Filters.text & Filters.regex('^[0-9]+$'), amount_conv)],
-        onWhat: [MessageHandler(~Filters.command, onWhat_conv)],
-        Category: [MessageHandler(~Filters.command, category_conv)],
-        Note: [MessageHandler(~Filters.command, note_conv)],
+        Amount: [MessageHandler(filters.TEXT & filters.Regex('^[0-9]+$'), amount_conv)],
+        onWhat: [MessageHandler(~filters.COMMAND, onWhat_conv)],
+        Category: [MessageHandler(~filters.COMMAND, category_conv)],
+        Note: [MessageHandler(~filters.COMMAND, note_conv)],
     },
     fallbacks=[CommandHandler("cancel", cancel)],
 )

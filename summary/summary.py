@@ -1,5 +1,5 @@
-from telegram.update import Update
-from telegram.ext.callbackcontext import CallbackContext
+from telegram import Update
+from telegram.ext import CallbackContext
 import matplotlib
 matplotlib.use("Agg")
 from database.database import getSummary
@@ -8,8 +8,8 @@ from datetime import datetime, timedelta
 from summary.getTempImg import getTempImg
 
 
-def summary(update: Update, context: CallbackContext):
-    # update.message.reply_text("placeholderText For Summary")
+async def summary(update: Update, context: CallbackContext):
+    # await update.message.reply_text("placeholderText For Summary")
     # responseList = [[amountSpent1: int, Category1: str, DateTime1: str], [amountSpent2, Category2, DateTime2: str]]
     # responseList = getData(str:YYYY-MM)
     # Request which will be a string => YYYY-MM
@@ -21,12 +21,15 @@ def summary(update: Update, context: CallbackContext):
     
 
     # Subtract one month from the current date
-    prev_date = curr_date - timedelta(days=30)
-    
+    # prev_date = curr_date - timedelta(days=30)
+    # DEMONSTRATION PURPOSES:
+    prev_date = curr_date
+
+
     userID = update.message.from_user["id"]
     responseList = getSummary(prev_date.year, prev_date.month, userID)
     if responseList == []:
-        update.message.reply_text("You have no data from the previous month. Try the /summaryFromGivenMonth command.")
+        await update.message.reply_text("You have no data from the previous month. Try the /summaryFromGivenMonth command.")
     # time = getCurrentTime()
     # You need to write some code here to depict this data
     else:
