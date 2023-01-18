@@ -33,8 +33,10 @@ def getTempImg(lables, vals):
         def my_autopct(pct):
             total = sum(sizes)
             val = int(round(pct*total/100.0))
-            return '{p:.2f}%  ₹{v:d}'.format(p=pct,v=val)  # add rupee symbol
+            return '{p:.2f}%  ₹{v:d}'.format(p=pct,v=val) 
         return my_autopct
+
+    
     plt.pie(vals, labels = lables, colors=color,autopct=make_autopct(vals) )
     plt.axis('equal')
     

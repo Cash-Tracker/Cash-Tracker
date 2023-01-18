@@ -21,8 +21,11 @@ async def summary(update: Update, context: CallbackContext):
     
 
     # Subtract one month from the current date
-    prev_date = curr_date - timedelta(days=30)
-    
+    # prev_date = curr_date - timedelta(days=30)
+    # DEMONSTRATION PURPOSES:
+    prev_date = curr_date
+
+
     userID = update.message.from_user["id"]
     responseList = getSummary(prev_date.year, prev_date.month, userID)
     if responseList == []:
