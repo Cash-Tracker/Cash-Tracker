@@ -8,6 +8,8 @@ Cash Tracker is a telegram bot used to track and summarise personal expenses.
 pip install -r requirements.txt
 ```
 
+- Get the `.env` file from the maintainer
+
 - Then run `python3 main.py` to run the bot. 
 
 ## Maintainer
