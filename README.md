@@ -12,5 +12,5 @@ pip install -r requirements.txt
 
 ## Maintainer
 
-Anurag Rao @anuragrao04 
+Anurag Rao [@anuragrao04](https://github.com/anuragrao04)
 +91 9663006833
