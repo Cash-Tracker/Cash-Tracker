@@ -10,3 +10,7 @@ pip install -r requirements.txt
 
 - Then run `python3 main.py` to run the bot. 
 
+## Maintainer
+
+Anurag Rao @anuragrao04 
++91 9663006833
