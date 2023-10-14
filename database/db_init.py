@@ -16,4 +16,3 @@ try:
     dbCursor = db.cursor()
 except:
     print("Something is Wrong with MySQL Connection!")
-
